@@ -169,8 +169,8 @@ def generate_with_huggingface(prompt):
     # Use Hugging Face's free Stable Diffusion model
     API_URL = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0"
     
-    # Enhance the prompt for better thumbnail generation
-    enhanced_prompt = f"YouTube thumbnail style, {prompt}, high quality, vibrant colors, eye-catching, professional, 16:9 aspect ratio, bold text overlay space, dramatic lighting"
+    # Enhance the prompt for better thumbnail generation (without YouTube icons)
+    enhanced_prompt = f"Professional thumbnail design, {prompt}, high quality, vibrant colors, eye-catching, clean composition, 16:9 aspect ratio, bold text overlay space, dramatic lighting, no logos, no watermarks, no icons"
     
     headers = {
         "Authorization": "Bearer hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",  # You need to replace this with your actual token
@@ -226,7 +226,9 @@ def fallback_image_generation(prompt):
     
     # Try Pollinations AI (free alternative)
     try:
-        pollinations_url = f"https://image.pollinations.ai/prompt/{requests.utils.quote(prompt + ' YouTube thumbnail style high quality')}"
+        # Remove YouTube reference and add clean design specification
+        clean_prompt = f"{prompt} professional thumbnail design high quality clean composition no logos no icons no watermarks"
+        pollinations_url = f"https://image.pollinations.ai/prompt/{requests.utils.quote(clean_prompt)}"
         
         response = requests.get(pollinations_url, timeout=30)
         if response.status_code == 200:
