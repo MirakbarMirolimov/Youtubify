@@ -1,4 +1,5 @@
-# React + Flask Landing Page
+# React + Flask Project
+
 
 A beautiful, modern landing page built with React frontend and Flask backend.
 
